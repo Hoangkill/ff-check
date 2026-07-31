@@ -1,1 +1,226 @@
-# ff-check
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Fire Player Check</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div id="particles"></div>
+
+<!-- Popup -->
+
+<div class="popup" id="welcomePopup">
+
+<div class="popup-box">
+
+<h2>💢 Chào mừng quý khách đến và trải nghiệm web bên mình !!❕</h2>
+
+<div class="popup-info">
+
+<span>👑 Admin : Van Kiều</span>
+
+<span>📞 SĐT : 03xxxxxxxx</span>
+
+</div>
+
+<button id="closePopup">
+
+Đóng
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="container">
+
+<div class="logo">
+
+<h1>FREE FIRE</h1>
+
+<h2>PLAYER CHECK</h2>
+
+</div>
+
+<div class="search-box">
+
+<input
+type="text"
+id="uid"
+placeholder="Nhập UID Game Free Fire">
+
+<select id="region">
+
+<option value="VN">🇻🇳 VN</option>
+
+<option value="IND">🇮🇳 IND</option>
+
+<option value="SG">🇸🇬 SG</option>
+
+<option value="TH">🇹🇭 TH</option>
+
+<option value="BR">🇧🇷 BR</option>
+
+<option value="ME">🌍 ME</option>
+
+</select>
+
+<button id="checkBtn">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+CHECK
+
+</button>
+
+</div>
+
+<div class="loading" id="loading">
+
+<div class="loader"></div>
+
+<p>Đang kiểm tra...</p>
+
+</div>
+
+<div class="card" id="resultCard">
+
+<div class="avatar">
+
+<img
+id="avatar"
+src="https://i.imgur.com/8Km9tLL.png">
+
+</div>
+
+<div class="info">
+
+<div class="item">
+
+Tên
+
+<span id="nickname">---</span>
+
+</div>
+
+<div class="item">
+
+UID
+
+<span id="accountId">---</span>
+
+</div>
+
+<div class="item">
+
+Server
+
+<span id="server">---</span>
+
+</div>
+
+<div class="item">
+
+Level
+
+<span id="level">---</span>
+
+</div>
+
+<div class="item">
+
+EXP
+
+<span id="exp">---</span>
+
+</div>
+
+<div class="item">
+
+Like
+
+<span id="liked">---</span>
+
+</div>
+
+<div class="item">
+
+Rank BR
+
+<span id="rank">---</span>
+
+</div>
+
+<div class="item">
+
+Rank CS
+
+<span id="csrank">---</span>
+
+</div>
+
+<div class="item">
+
+Clan
+
+<span id="clan">---</span>
+
+</div>
+
+<div class="item">
+
+Pet
+
+<span id="pet">---</span>
+
+</div>
+
+<div class="item">
+
+Credit Score
+
+<span id="credit">---</span>
+
+</div>
+
+<div class="item">
+
+Signature
+
+<span id="signature">---</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
