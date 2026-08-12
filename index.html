@@ -1,226 +1,338 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tra cứu điểm thi - Mô phỏng</title>
+  <style>
+    * { box-sizing: border-box; }
 
-<meta charset="UTF-8">
+    body {
+      margin: 0;
+      background: #fff;
+      color: #222;
+      font-family: "Times New Roman", serif;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    .header {
+      width: calc(100% - 10px);
+      margin: 0 5px;
+      min-height: 92px;
+      background: #3f7abd;
+      border: 1px solid #777;
+      display: flex;
+      align-items: center;
+      padding: 10px 18px;
+    }
 
-<title>Free Fire Player Check</title>
+    .logo {
+      width: 72px;
+      height: 72px;
+      margin-right: 20px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #d71920;
+      padding: 5px;
+    }
 
-<link rel="stylesheet" href="style.css">
+    .header-title {
+      color: #ffef28;
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    .notice {
+      width: 96%;
+      margin: 14px auto 0;
+      padding: 8px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #8b0000;
+      font-weight: bold;
+    }
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    .box {
+      width: 96%;
+      margin: 0 auto 28px;
+      min-height: 430px;
+      background: #f4f4f4;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 42px 14%;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    .box h4 {
+      margin: 0 0 7px;
+      text-align: center;
+      font-size: 14px;
+    }
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    .box h1 {
+      margin: 0 0 15px;
+      text-align: center;
+      font-size: 20px;
+    }
 
+    .description {
+      margin: 0 auto 20px;
+      max-width: 650px;
+      line-height: 1.35;
+      font-size: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      margin: 10px auto;
+      max-width: 560px;
+    }
+
+    .form-row label {
+      width: 118px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input {
+      height: 27px;
+      border: 1px solid #ccc;
+      padding: 4px 7px;
+      font-family: Arial, sans-serif;
+    }
+
+    #studentId { width: 245px; }
+    #captcha { width: 95px; }
+
+    .captcha-wrap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .captcha-img {
+      width: 110px;
+      height: 28px;
+      border: 1px solid #aaa;
+      background:
+        repeating-linear-gradient(8deg, transparent 0 5px, #7fa5d2 6px 7px),
+        #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5c82b3;
+      font-family: cursive;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      transform: rotate(-1deg);
+    }
+
+    .refresh {
+      border: 0;
+      background: transparent;
+      font-size: 25px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .btn {
+      display: block;
+      margin: 10px 0 25px 118px;
+      padding: 8px 25px;
+      border: 0;
+      background: #2f8aca;
+      color: white;
+      font-weight: bold;
+      font-family: "Times New Roman", serif;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #2474ad; }
+
+    #result {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .result-line {
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    .scores {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      background: white;
+    }
+
+    .scores th, .scores td {
+      border: 1px solid #bbb;
+      padding: 8px 5px;
+      text-align: center;
+    }
+
+    .scores th {
+      background: #e7e7e7;
+    }
+
+    .total {
+      margin-top: 12px;
+      text-align: right;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 15px;
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 700px) {
+      .header-title { font-size: 15px; }
+      .logo { width: 55px; height: 55px; margin-right: 10px; }
+      .box { padding: 30px 5%; }
+      .form-row { display: block; }
+      .form-row label {
+        display: block;
+        width: auto;
+        margin-bottom: 5px;
+      }
+      .btn { margin-left: 0; }
+      #studentId { width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="particles"></div>
-
-<!-- Popup -->
-
-<div class="popup" id="welcomePopup">
-
-<div class="popup-box">
-
-<h2>💢 Chào mừng quý khách đến và trải nghiệm web bên mình !!❕</h2>
-
-<div class="popup-info">
-
-<span>👑 Admin : Van Kiều</span>
-
-<span>📞 SĐT : 03xxxxxxxx</span>
-
-</div>
-
-<button id="closePopup">
-
-Đóng
-
-</button>
-
-</div>
-
-</div>
-
-<!-- Main -->
-
-<div class="container">
-
-<div class="logo">
-
-<h1>FREE FIRE</h1>
-
-<h2>PLAYER CHECK</h2>
-
-</div>
-
-<div class="search-box">
-
-<input
-type="text"
-id="uid"
-placeholder="Nhập UID Game Free Fire">
-
-<select id="region">
-
-<option value="VN">🇻🇳 VN</option>
-
-<option value="IND">🇮🇳 IND</option>
-
-<option value="SG">🇸🇬 SG</option>
-
-<option value="TH">🇹🇭 TH</option>
-
-<option value="BR">🇧🇷 BR</option>
-
-<option value="ME">🌍 ME</option>
-
-</select>
-
-<button id="checkBtn">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-CHECK
-
-</button>
-
-</div>
-
-<div class="loading" id="loading">
-
-<div class="loader"></div>
-
-<p>Đang kiểm tra...</p>
-
-</div>
-
-<div class="card" id="resultCard">
-
-<div class="avatar">
-
-<img
-id="avatar"
-src="https://i.imgur.com/8Km9tLL.png">
-
-</div>
-
-<div class="info">
-
-<div class="item">
-
-Tên
-
-<span id="nickname">---</span>
-
-</div>
-
-<div class="item">
-
-UID
-
-<span id="accountId">---</span>
-
-</div>
-
-<div class="item">
-
-Server
-
-<span id="server">---</span>
-
-</div>
-
-<div class="item">
-
-Level
-
-<span id="level">---</span>
-
-</div>
-
-<div class="item">
-
-EXP
-
-<span id="exp">---</span>
-
-</div>
-
-<div class="item">
-
-Like
-
-<span id="liked">---</span>
-
-</div>
-
-<div class="item">
-
-Rank BR
-
-<span id="rank">---</span>
-
-</div>
-
-<div class="item">
-
-Rank CS
-
-<span id="csrank">---</span>
-
-</div>
-
-<div class="item">
-
-Clan
-
-<span id="clan">---</span>
-
-</div>
-
-<div class="item">
-
-Pet
-
-<span id="pet">---</span>
-
-</div>
-
-<div class="item">
-
-Credit Score
-
-<span id="credit">---</span>
-
-</div>
-
-<div class="item">
-
-Signature
-
-<span id="signature">---</span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
+  <div class="header">
+    <div class="logo">★</div>
+    <div class="header-title">
+      BỘ GIÁO DỤC VÀ ĐÀO TẠO<br>
+      TRANG THÔNG TIN KỲ THI QUỐC GIA
+    </div>
+  </div>
+
+  <div class="notice">
+    ⚠️ GIAO DIỆN MÔ PHỎNG VUI VUI — KHÔNG PHẢI TRANG TRA CỨU CHÍNH THỨC
+  </div>
+
+  <div class="box">
+    <h4>SỞ GIÁO DỤC VÀ ĐÀO TẠO LAI CHÂU</h4>
+    <h1>TRA CỨU ĐIỂM THI THPT QUỐC GIA</h1>
+
+    <p class="description">
+      Thí sinh nhập tài khoản từ địa chỉ
+      <span style="color:#0000cc;">http://thisinh.thitptquocgia.edu.vn</span>
+      hoặc nhập số báo danh và mã xác nhận vào các ô dưới đây
+    </p>
+
+    <div class="form-row">
+      <label for="studentId">Số báo danh</label>
+      <input id="studentId" type="text" inputmode="numeric" placeholder="Nhập số báo danh">
+    </div>
+
+    <div class="form-row">
+      <label for="captcha">Mã xác nhận</label>
+      <div class="captcha-wrap">
+        <input id="captcha" type="text" maxlength="6" placeholder="CAPTCHA">
+        <div class="captcha-img" id="captchaImage">BE6BK</div>
+        <button class="refresh" onclick="newCaptcha()" title="Đổi mã">↻</button>
+      </div>
+    </div>
+
+    <button class="btn" onclick="lookup()">Tra cứu</button>
+
+    <div id="error" class="hidden" style="color:#c00; font-weight:bold; margin-bottom:15px;">
+      Số báo danh hoặc mã xác nhận không đúng!
+    </div>
+
+    <div id="result" class="hidden">
+      <div class="result-line">
+        <strong>Họ và tên:</strong> <span id="name">Tẩn Văn Kiều</span>
+      </div>
+
+      <div class="result-line"><strong>Điểm các môn:</strong></div>
+
+      <table class="scores">
+        <thead>
+          <tr>
+            <th>Toán</th>
+            <th>Ngữ văn</th>
+            <th>Vật lí</th>
+            <th>Hóa học</th>
+            <th>Sinh học</th>
+            <th>KHTN</th>
+            <th>Tiếng Anh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>9.0</td>
+            <td>8.5</td>
+            <td>9.0</td>
+            <td>8.0</td>
+            <td>9.5</td>
+            <td>10.0</td>
+            <td>9.0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="total">
+        Tổng điểm tất cả môn: <span id="totalScore">63.0</span>
+      </div>
+
+      <div class="note">
+        Ghi chú: Dữ liệu trên chỉ là dữ liệu mô phỏng để giải trí.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentCaptcha = "BE6BK";
+
+    function newCaptcha() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      currentCaptcha = "";
+      for (let i = 0; i < 5; i++) {
+        currentCaptcha += chars[Math.floor(Math.random() * chars.length)];
+      }
+      document.getElementById("captchaImage").textContent = currentCaptcha;
+      document.getElementById("captcha").value = "";
+    }
+
+    function lookup() {
+      const id = document.getElementById("studentId").value.trim();
+      const captcha = document.getElementById("captcha").value.trim().toUpperCase();
+      const result = document.getElementById("result");
+      const error = document.getElementById("error");
+
+      result.classList.add("hidden");
+      error.classList.add("hidden");
+
+      // Dữ liệu mô phỏng:
+      // SBD 0111119 + CAPTCHA đúng => Tẩn Văn Kiều
+      if (id === "0111119" && captcha === currentCaptcha) {
+        result.classList.remove("hidden");
+      } else {
+        error.classList.remove("hidden");
+      }
+    }
+
+    // Tính tổng điểm tự động từ các ô điểm
+    const scores = [9.0, 8.5, 9.0, 8.0, 9.5, 10.0, 9.0];
+    const total = scores.reduce((sum, score) => sum + score, 0);
+    document.getElementById("totalScore").textContent = total.toFixed(1);
+  </script>
 
 </body>
-
 </html>
