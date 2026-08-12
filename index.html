@@ -257,7 +257,7 @@
 
     <div id="result" class="hidden">
       <div class="result-line">
-        <strong>Họ và tên:</strong> <span id="name">La Văn Phúc</span>
+        <strong>Họ và tên:</strong> <span id="name">Tẩn Văn Kiều</span>
       </div>
 
       <div class="result-line"><strong>Điểm các môn:</strong></div>
@@ -292,13 +292,13 @@
       </div>
 
       <div class="note">
-        Ghi chú: Dữ liệu trên chỉ là dữ liệu mô phỏng để giải trí.
+        Ghi chú: Dữ liệu trên chỉ là dữ liệu mô phỏng để giải trí. Có 3 hồ sơ mẫu.
       </div>
     </div>
   </div>
 
   <script>
-    let currentCaptcha = "CONCAC";
+    let currentCaptcha = "BE6BK";
 
     function newCaptcha() {
       const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -319,11 +319,40 @@
       result.classList.add("hidden");
       error.classList.add("hidden");
 
-      // Dữ liệu mô phỏng:
-      // SBD 0111119 + CAPTCHA đúng => La Văn Phúc
-      if (id === "0112233" && captcha === currentCaptcha) {
+      // Dữ liệu mô phỏng vui vui.
+      const students = {
+        "0111119": {
+          name: "Tẩn Văn Kiều",
+          scores: [9.0, 8.5, 9.0, 8.0, 9.5, 10.0, 9.0]
+        },
+        "0112233": {
+          name: "La Văn Phúc",
+          scores: [8.0, 7.5, 8.0, 7.0, 8.5, 7.5, 8.0]
+        },
+        "011223344": {
+          name: "Lò Đức Dương",
+          scores: [6.0, 7.0, 5.5, 8.0, 6.5, 7.5, 5.0]
+        }
+      };
+
+      if (students[id] && captcha === currentCaptcha) {
+        const student = students[id];
+
+        document.getElementById("name").textContent = student.name;
+
+        const scoreCells = document.querySelectorAll("#result .scores tbody td");
+        student.scores.forEach((score, index) => {
+          scoreCells[index].textContent = score.toFixed(1);
+        });
+
+        const total = student.scores.reduce((sum, score) => sum + score, 0);
+        document.getElementById("totalScore").textContent = total.toFixed(1);
+
         result.classList.remove("hidden");
       } else {
+        error.classList.remove("hidden");
+      }
+    } else {
         error.classList.remove("hidden");
       }
     }
